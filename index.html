@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimisation du Provisionnement Laptops - Onboarding</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#B71E4C',
+                            navy: '#1B2D5B',
+                            teal: '#2CA1AC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        .accordion-content {
+            display: none;
+        }
+        .accordion-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-[#1B2D5B] text-white shadow-md border-b-4 border-[#B71E4C]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="bg-white p-2 rounded-xl shadow flex items-center justify-center">
+                    <!-- Logo chargé depuis le répertoire courant -->
+                    <img src="logo_2.png" alt="Logo" class="h-10 w-auto object-contain" />
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">Stratégies d'Optimisation Onboarding Laptop</h1>
+                    <p class="text-xs text-[#2CA1AC] font-medium">Déploiement Windows Autopilot & WHFB (MFA)</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 text-xs bg-[#2CA1AC]/20 px-3 py-1.5 rounded-full border border-[#2CA1AC]/40 text-slate-100">
+                <i class="fa-solid fa-sliders text-[#2CA1AC]"></i>
+                <span>Note d'orientation IT & Cellule Recrutement</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Context Card -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border-l-4 border-[#2CA1AC]">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-[#2CA1AC]/10 rounded-lg text-[#2CA1AC] hidden sm:block">
+                    <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-base font-bold text-[#1B2D5B] mb-1">
+                        Problématique : Délais d'Enrôlement Jour 1 vs Planning de Formation
+                    </h2>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Le déploiement automatisé via <strong>Windows Autopilot</strong> et la sécurisation <strong>WHFB / MFA</strong> garantissent la conformité du parc. Cependant, lors des nouvelles entrées en service, le temps cumulé des téléchargements et des étapes d'authentification crée des retards gênants pour les formations prévues dès le premier jour.
+                        Voici les pistes d'optimisation techniques et organisationnelles proposées.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between border border-slate-200/80">
+            <div class="flex flex-wrap gap-1.5 w-full md:w-auto" id="category-filters">
+                <button onclick="filterCategory('Tous')" class="cat-btn bg-[#1B2D5B] text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">Tous</button>
+                <button onclick="filterCategory('Optimisation Technique')" class="cat-btn bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">Optimisation Technique</button>
+                <button onclick="filterCategory('Organisationnel')" class="cat-btn bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">Organisationnel</button>
+                <button onclick="filterCategory('MFA & Sécurité')" class="cat-btn bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">MFA & Sécurité</button>
+            </div>
+
+            <div class="relative w-full md:w-64">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input
+                    type="text"
+                    id="search-input"
+                    onkeyup="filterSearch()"
+                    placeholder="Filtrer une option..."
+                    class="w-full pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-[#2CA1AC]"
+                />
+            </div>
+        </div>
+
+        <!-- Accordions Container -->
+        <div class="space-y-4" id="options-container">
+
+            <!-- Item 1 -->
+            <div class="option-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" data-category="Optimisation Technique">
+                <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none hover:bg-slate-50/80 transition-colors" onclick="toggleAccordion('item1')">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white shadow-sm flex-shrink-0 bg-[#B71E4C]">
+                            <i class="fa-solid fa-bolt-lightning"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-emerald-100 text-emerald-800 border-emerald-300">Recommandé IT</span>
+                                <span class="text-xs text-slate-400 font-medium">| Optimisation Technique</span>
+                            </div>
+                            <h3 class="text-sm sm:text-base font-bold text-[#1B2D5B]">1. Windows Autopilot Pre-Provisioning (White Glove / Pre-stage)</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Pré-téléchargement et installation des applications lourdes et politiques Intune en atelier IT avant la remise du laptop.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 flex-shrink-0">
+                        <span class="hidden lg:inline-block text-xs font-medium px-3 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">
+                            <i class="fa-regular fa-clock mr-1 text-[#2CA1AC]"></i> ~5 à 10 minutes le Jour J
+                        </span>
+                        <i id="icon-item1" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </div>
+                </div>
+                <div id="content-item1" class="accordion-content active px-6 pb-6 pt-3 border-t border-slate-100 bg-slate-50/60">
+                    <p class="text-xs text-slate-700 leading-relaxed mb-4 bg-white p-4 rounded-lg border border-slate-200">
+                        Le processus "Pre-provisioned deployment" permet au technicien Service Desk d'exécuter la phase "Device ESP" (téléchargement de Windows, Win32 Apps, M365, scripts) à l'avance en atelier. Le jour J, l'utilisateur final n'effectue que la phase "User ESP" (authentification Entra ID + enregistrement WHFB & MFA), réduisant le temps d'attente de 45-60 min à moins de 5-10 min.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50/70 rounded-lg p-4 border border-emerald-200">
+                            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> Avantages</h4>
+                            <ul class="space-y-1.5 text-xs text-emerald-950">
+                                <li>• Gain de temps massif le jour J (passage de 45-60 min à ~5 min pour le collaborateur)</li>
+                                <li>• Expérience d'accueil fluide : le laptop est prêt immédiatement dès l'ouverture</li>
+                                <li>• Niveau de sécurité maximal conservé (MFA et profil individuel WHFB)</li>
+                                <li>• Transparence totale pour la cellule de recrutement et les formateurs</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/70 rounded-lg p-4 border border-rose-200">
+                            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Inconvénients & Modérateurs</h4>
+                            <ul class="space-y-1.5 text-xs text-rose-950">
+                                <li>• Préparation préalable requise par l'équipe IT (24h à 48h avant la session d'accueil)</li>
+                                <li>• Espace physique et prises réseau/Wi-Fi requis côté atelier pour le pré-provisionnement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="option-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" data-category="Organisationnel">
+                <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none hover:bg-slate-50/80 transition-colors" onclick="toggleAccordion('item2')">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white shadow-sm flex-shrink-0 bg-[#1B2D5B]">
+                            <i class="fa-solid fa-display"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-blue-100 text-blue-800 border-blue-300">Piste RH / Salles</span>
+                                <span class="text-xs text-slate-400 font-medium">| Organisationnel & Infrastructure</span>
+                            </div>
+                            <h3 class="text-sm sm:text-base font-bold text-[#1B2D5B]">2. Salle de Formation en Mode Kiosque / Postes Mutualisés</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Utilisation de PC fixes ou laptops de salle pré-configurés en session générique Kiosque pour le premier jour.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 flex-shrink-0">
+                        <span class="hidden lg:inline-block text-xs font-medium px-3 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">
+                            <i class="fa-regular fa-clock mr-1 text-[#2CA1AC]"></i> 0 min d'attente (Formation directe)
+                        </span>
+                        <i id="icon-item2" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </div>
+                </div>
+                <div id="content-item2" class="accordion-content px-6 pb-6 pt-3 border-t border-slate-100 bg-slate-50/60">
+                    <p class="text-xs text-slate-700 leading-relaxed mb-4 bg-white p-4 rounded-lg border border-slate-200">
+                        Les nouveaux arrivants réalisent les formations du premier jour sur des postes de salle déjà opérationnels (sessions génériques ou Kiosque). La remise et l'enrôlement Autopilot/WHFB sur leur laptop personnel sont décalés en fin de journée ou le lendemain matin.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50/70 rounded-lg p-4 border border-emerald-200">
+                            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> Avantages</h4>
+                            <ul class="space-y-1.5 text-xs text-emerald-950">
+                                <li>• Démarrage immédiat des cours le matin du Jour 1 sans blocage informatique</li>
+                                <li>• Environnement fixe et maîtrisé pour les formateurs</li>
+                                <li>• Temps d'enrôlement déplacé hors des plages de formation</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/70 rounded-lg p-4 border border-rose-200">
+                            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Inconvénients & Modérateurs</h4>
+                            <ul class="space-y-1.5 text-xs text-rose-950">
+                                <li>• Coût et gestion d'une infrastructure physique dédiée (parc fixe ou flotte de cours)</li>
+                                <li>• L'utilisateur n'est pas sur son propre matériel le premier jour</li>
+                                <li>• Gestion logistique supplémentaire pour l'IT</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="option-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" data-category="Organisationnel">
+                <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none hover:bg-slate-50/80 transition-colors" onclick="toggleAccordion('item3')">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white shadow-sm flex-shrink-0 bg-[#2CA1AC]">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-amber-100 text-amber-800 border-amber-300">Alternative Agenda</span>
+                                <span class="text-xs text-slate-400 font-medium">| Organisationnel</span>
+                            </div>
+                            <h3 class="text-sm sm:text-base font-bold text-[#1B2D5B]">3. Décalage de l'Enrôlement IT au Jour 2</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Consacrer le Jour 1 aux présentations RH et modules théoriques sans PC ; réaliser l'initialisation IT le Jour 2.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 flex-shrink-0">
+                        <span class="hidden lg:inline-block text-xs font-medium px-3 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">
+                            <i class="fa-regular fa-clock mr-1 text-[#2CA1AC]"></i> 0 min d'attente (Jour 1)
+                        </span>
+                        <i id="icon-item3" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </div>
+                </div>
+                <div id="content-item3" class="accordion-content px-6 pb-6 pt-3 border-t border-slate-100 bg-slate-50/60">
+                    <p class="text-xs text-slate-700 leading-relaxed mb-4 bg-white p-4 rounded-lg border border-slate-200">
+                        Réadapter le programme d'intégration en concertation avec la cellule de recrutement. La première journée est dédiée à la présentation de l'organisation, visite des bâtiments, remise des badges et ateliers ne nécessitant pas d'ordinateur. Le premier démarrage Autopilot/WHFB a lieu le matin du Jour 2.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50/70 rounded-lg p-4 border border-emerald-200">
+                            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> Avantages</h4>
+                            <ul class="space-y-1.5 text-xs text-emerald-950">
+                                <li>• Aucun surcoût en matériel ou licences</li>
+                                <li>• Allègement de la charge d'information pour le nouveau venu le 1er jour</li>
+                                <li>• Enrôlements groupés par petits lots possibles au Jour 2</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/70 rounded-lg p-4 border border-rose-200">
+                            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Inconvénients & Modérateurs</h4>
+                            <ul class="space-y-1.5 text-xs text-rose-950">
+                                <li>• Impulsion et refonte nécessaire des plannings de formation RH</li>
+                                <li>• Incompatible si les cours du Jour 1 demandent un accès informatique immédiat</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="option-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" data-category="MFA & Sécurité">
+                <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none hover:bg-slate-50/80 transition-colors" onclick="toggleAccordion('item4')">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white shadow-sm flex-shrink-0 bg-slate-700">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-purple-100 text-purple-800 border-purple-300">Best Practice MFA</span>
+                                <span class="text-xs text-slate-400 font-medium">| MFA & Sécurité</span>
+                            </div>
+                            <h3 class="text-sm sm:text-base font-bold text-[#1B2D5B]">4. Pass d'Accès Temporaire (Temporary Access Pass - TAP)</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Utilisation de Pass Temporel pour franchir WHFB/MFA sans la friction de l'enregistrement smartphone le Jour 1.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 flex-shrink-0">
+                        <span class="hidden lg:inline-block text-xs font-medium px-3 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">
+                            <i class="fa-regular fa-clock mr-1 text-[#2CA1AC]"></i> Gain de ~15 minutes
+                        </span>
+                        <i id="icon-item4" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </div>
+                </div>
+                <div id="content-item4" class="accordion-content px-6 pb-6 pt-3 border-t border-slate-100 bg-slate-50/60">
+                    <p class="text-xs text-slate-700 leading-relaxed mb-4 bg-white p-4 rounded-lg border border-slate-200">
+                        Pour éviter le blocage où le collaborateur doit enregistrer son Microsoft Authenticator personnel pendant la séquence d'enrôlement, l'IT génère un code TAP (Temporary Access Pass) à durée limitée via Entra ID. Cela permet de finaliser WHFB très rapidement et d'effectuer la configuration MFA complète plus tard.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50/70 rounded-lg p-4 border border-emerald-200">
+                            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> Avantages</h4>
+                            <ul class="space-y-1.5 text-xs text-emerald-950">
+                                <li>• Élimine les interruptions dues aux téléphones personnels des agents</li>
+                                <li>• Fluidifie la première connexion Windows Hello</li>
+                                <li>• Recommandation officielle de sécurité Microsoft Entra</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/70 rounded-lg p-4 border border-rose-200">
+                            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Inconvénients & Modérateurs</h4>
+                            <ul class="space-y-1.5 text-xs text-rose-950">
+                                <li>• Processus strict de distribution des codes TAP par le Service Desk à formaliser</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="option-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" data-category="Optimisation Technique">
+                <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none hover:bg-slate-50/80 transition-colors" onclick="toggleAccordion('item5')">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-white shadow-sm flex-shrink-0 bg-slate-700">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-teal-100 text-teal-800 border-teal-300">Piste Intune</span>
+                                <span class="text-xs text-slate-400 font-medium">| Optimisation Technique</span>
+                            </div>
+                            <h3 class="text-sm sm:text-base font-bold text-[#1B2D5B]">5. Profil Autopilot ESP Allégé (Minimal Provisioning)</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Bloquer la page de statut (ESP) uniquement sur la sécurité stricte ; diffuser les gros logiciels en arrière-plan.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 flex-shrink-0">
+                        <span class="hidden lg:inline-block text-xs font-medium px-3 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">
+                            <i class="fa-regular fa-clock mr-1 text-[#2CA1AC]"></i> ~15 minutes le Jour J
+                        </span>
+                        <i id="icon-item5" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </div>
+                </div>
+                <div id="content-item5" class="accordion-content px-6 pb-6 pt-3 border-t border-slate-100 bg-slate-50/60">
+                    <p class="text-xs text-slate-700 leading-relaxed mb-4 bg-white p-4 rounded-lg border border-slate-200">
+                        Ajuster la configuration de l'Enrollment Status Page (ESP) dans Intune pour qu'elle ne bloque l'accès au bureau que pour les agents indispensables (Antivirus, EDR, VPN). La suite Office et les applications lourdes continuent de s'installer silencieusement une fois l'utilisateur sur sa session.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50/70 rounded-lg p-4 border border-emerald-200">
+                            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> Avantages</h4>
+                            <ul class="space-y-1.5 text-xs text-emerald-950">
+                                <li>• Accès au bureau et aux outils de base en moins de 15 minutes</li>
+                                <li>• Modification 100% logicielle via Intune sans coût</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/70 rounded-lg p-4 border border-rose-200">
+                            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Inconvénients & Modérateurs</h4>
+                            <ul class="space-y-1.5 text-xs text-rose-950">
+                                <li>• Charge réseau le matin si de nombreux postes s'installent en simultané</li>
+                                <li>• Certaines applications spécialisées indisponibles durant les premières heures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Matrix Table -->
+        <div class="mt-12 bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+            <h3 class="text-base font-bold text-[#1B2D5B] mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-table text-[#B71E4C]"></i>
+                Matrice Comparative des Options
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-[#1B2D5B] text-white">
+                            <th class="p-3 rounded-tl-lg font-semibold">Piste d'Optimisation</th>
+                            <th class="p-3 font-semibold">Gains de Temps (Jour 1)</th>
+                            <th class="p-3 font-semibold">Effort IT</th>
+                            <th class="p-3 font-semibold">Impact Organisation RH</th>
+                            <th class="p-3 rounded-tr-lg font-semibold">Niveau Sécurité / Conformité</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-[#1B2D5B]">1. Autopilot Pre-Provisioning</td>
+                            <td class="p-3 text-emerald-600 font-semibold">&lt; 10 min</td>
+                            <td class="p-3 text-amber-600">Moyen (Préparation J-1)</td>
+                            <td class="p-3 text-emerald-600">Nul (Expérience optimale)</td>
+                            <td class="p-3 text-emerald-600 font-bold">Maximal (100%)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-[#1B2D5B]">2. Salle Kiosque / Postes Fixes</td>
+                            <td class="p-3 text-emerald-600 font-semibold">0 min d'attente</td>
+                            <td class="p-3 text-rose-600">Élevé (Gestion double parc)</td>
+                            <td class="p-3 text-amber-600">Moyen (Gestion salles)</td>
+                            <td class="p-3 text-emerald-600 font-bold">Élevé</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-[#1B2D5B]">3. Décalage de l'Installation au J2</td>
+                            <td class="p-3 text-emerald-600 font-semibold">0 min (Jour 1)</td>
+                            <td class="p-3 text-emerald-600">Nul</td>
+                            <td class="p-3 text-rose-600">Élevé (Refonte agenda)</td>
+                            <td class="p-3 text-emerald-600 font-bold">Maximal (100%)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-[#1B2D5B]">4. Temporary Access Pass (TAP)</td>
+                            <td class="p-3 text-emerald-600 font-semibold">Gain de ~15 min</td>
+                            <td class="p-3 text-emerald-600">Faible (Génération code)</td>
+                            <td class="p-3 text-emerald-600">Nul</td>
+                            <td class="p-3 text-emerald-600 font-bold">Maximal (Best Practice MS)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-[#1B2D5B]">5. Profil Intune ESP Allégé</td>
+                            <td class="p-3 text-emerald-600 font-semibold">~15 min</td>
+                            <td class="p-3 text-emerald-600">Faible (Ajustement Intune)</td>
+                            <td class="p-3 text-emerald-600">Très Faible</td>
+                            <td class="p-3 text-emerald-600 font-bold">Élevé</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recommendation Banner -->
+        <div class="mt-8 bg-gradient-to-br from-[#1B2D5B] via-[#1B2D5B] to-[#2CA1AC] text-white rounded-xl p-6 shadow-md border-l-4 border-[#B71E4C]">
+            <h3 class="text-base font-bold mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-bullseye text-[#B71E4C]"></i>
+                Recommandation Stratégique Combinée
+            </h3>
+            <p class="text-xs leading-relaxed opacity-95">
+                La solution la plus équilibrée consiste à combiner le <strong>Pre-Provisioning Autopilot (White Glove)</strong> avec l'émission de <strong>Pass d'Accès Temporaires (TAP)</strong>. Cette approche permet au Service Desk d'exécuter l'installation lourde en atelier au préalable. Le matin du premier jour, le nouveau collaborateur initialise son profil en <strong>moins de 5 à 10 minutes</strong> sans blocage sur son téléphone mobile.
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1B2D5B] text-slate-300 text-xs py-6 border-t border-slate-700 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>Analyse & Proposition d'Architecture Onboarding — Service Desk & Infrastructure IT</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script JS -->
+    <script>
+        function toggleAccordion(id) {
+            const content = document.getElementById('content-' + id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotate-180', 'text-[#B71E4C]');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotate-180', 'text-[#B71E4C]');
+            }
+        }
+
+        function filterCategory(cat) {
+            const cards = document.querySelectorAll('.option-card');
+            const buttons = document.querySelectorAll('.cat-btn');
+
+            buttons.forEach(btn => {
+                if(btn.innerText.includes(cat) || (cat === 'Tous' && btn.innerText === 'Tous')) {
+                    btn.className = "cat-btn bg-[#1B2D5B] text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-sm";
+                } else {
+                    btn.className = "cat-btn bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all";
+                }
+            });
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (cat === 'Tous' || cardCat.includes(cat)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.option-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
